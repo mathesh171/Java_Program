@@ -32,33 +32,32 @@ public class LongestVowelSubstring {
         Scanner sc = new Scanner(System.in);
         String s = sc.next();
         String vowel = "aeiou";
-        int i = 0, j = 0, k = 0, n = s.length();
-        int left = 0, right = 0, max = 0;
-        while(j<n){
-            if(s.charAt(j) == vowel.charAt(k)){
-                if(k==0){
-                    i = j;
-                }
+        int k = 0, n = s.length();
+        int i = 0, j = 0;
+        int left = 0, right = 0;
+        while(i<n && j<n){
+            char a = s.charAt(j);
+            char b = vowel.charAt(k);
+            if(a==b){
+                if(k==0)
+                    i=j;
                 k++;
-            }else if(k>0 && s.charAt(j)==vowel.charAt(k-1)){
-                j++;
+            }else if(k>0 && s.charAt(j) == vowel.charAt(k-1)){
                 continue;
             }else{
-                i++;
                 k=0;
+                i=j;
+                if(s.charAt(i) == 'a')
+                    k++;
             }
-            if(k==5) {
-                if(j-i > max){
-                    max = j-i;
-                    left = i;
-                    right = j;
-                }
-                k--;
+
+            if(k==5){
+                break;
             }
-            System.out.println(i+" "+j+" "+k);
+
             j++;
         }
-        System.out.println(s.substring(left, right+1));
+        System.out.println(s.substring(i, j+1));
     }
 }
 
